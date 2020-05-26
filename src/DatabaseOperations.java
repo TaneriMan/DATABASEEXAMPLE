@@ -61,6 +61,24 @@ public class DatabaseOperations
         }
     }
 
+    //Create Table in The Database
+    public void addColumntoTable(String databaseName, String userName , String password, String tableName, String colomnName)
+    {
+        try
+        {
+            Class.forName("org.postgresql.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + databaseName, userName, password);
+            System.out.println("Database connected...");
+            PreparedStatement preparedStatement = connection.prepareStatement("ALTER TABLE " + tableName + " ADD COLUMN " + colomnName + " VARCHAR");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            System.out.println("Column Added Successfully");
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     //Delete a Specific Table From Database
     public void deleteTable(String tableName)
     {
@@ -99,14 +117,14 @@ public class DatabaseOperations
     }
 
     //Insert a row the table "javaPostgresqlDatabase" is my database name
-    public void insertNameToDatabase(String name)
+    public void insertValueToDatabase(String databaseName, String userName , String password, String tableName, String colomnName, String insertValue)
     {
         try
         {
             Class.forName("org.postgresql.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/javaPostgresqlDatabase", "tanerduzceer", "107761Taner");
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + databaseName, userName, password);
             System.out.println("Database connected...");
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO List (names) VALUES ('" + name + "')" );
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO " +tableName+ " ("+ colomnName + ") VALUES ('" + insertValue + "')" );
             ResultSet resultSet = statement.executeQuery();
         }
         catch(Exception ex)
@@ -116,19 +134,19 @@ public class DatabaseOperations
     }
 
     //take names from database and write to string arraylist
-    public void getAllNamesFromDatabase()
+    public void getAllTableRows(String databaseName, String userName , String password, String tableName)
     {
         try
         {
             Class.forName("org.postgresql.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/javaPostgresqlDatabase", "tanerduzceer", "107761Taner");
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + databaseName, userName, password);
             System.out.println("Database connected...");
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM List");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + tableName);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 //This "1" is coloumn index
-                System.out.println(resultSet.getString(1));
+                System.out.println(resultSet.getString(1) + " " + resultSet.getString(2));
             }
             resultSet.close();
             preparedStatement.close();
