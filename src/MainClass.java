@@ -5,7 +5,7 @@ public class MainClass
     public static void main(String args[])  //static method
     {
         DatabaseOperations databaseOperations = new DatabaseOperations();
-//        databaseOperations.createTable("NamesAndPhones");
+////        databaseOperations.createTable("NamesAndPhones");
 //
 //        databaseOperations.addColumntoTable( "javaPostgresqlDatabase", "tanerduzceer" , "107761Taner", "namesAndPhones", "names" );
 //        databaseOperations.addColumntoTable( "javaPostgresqlDatabase", "tanerduzceer" , "107761Taner", "namesAndPhones", "phoneNumber" );

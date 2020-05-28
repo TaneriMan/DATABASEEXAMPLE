@@ -61,7 +61,7 @@ public class DatabaseOperations
         }
     }
 
-    //Create Table in The Database
+    ////Create Table in The Database
     public void addColumntoTable(String databaseName, String userName , String password, String tableName, String colomnName)
     {
         try
